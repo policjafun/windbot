@@ -70,6 +70,6 @@ module.exports = {
       }
     }
 
-    res.redirect('/dashboard');
+    res.redirect('/getUserGuilds');
   },
 };

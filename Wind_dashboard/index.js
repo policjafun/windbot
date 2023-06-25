@@ -57,7 +57,7 @@ files.forEach(f => {
 
     if (file.run2)       app.post(file.name, file.run2);
 
-    table.addRow( "dashboard", `${file.name}`)
+    table.addRow("dashboard", `${file.name}`)
  return console.log(`Dashboard ${table.toString()}`)
   }
 })
@@ -69,6 +69,6 @@ app.get('*', (req, res) => {
 
 
 
-client.login(process.env.TOKEN);
+client.login(process.env.TOKEN).then(console.log(`Logged In`));
 
 app.listen(process.env.PORT || 90, () => console.log(`App on port ${process.env.PORT || 90}`));

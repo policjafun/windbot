@@ -62,6 +62,6 @@ module.exports = {
     res.cookie('token', data.secretAccessKey, { maxAge: 835000 });
     console.log("Token cookie set:", data.secretAccessKey);
 
-    res.end("<script>window.location.href='/dashboard';</script>");
+    res.end("<script>window.location.href='/getUserGuilds';</script>");
   }
 };

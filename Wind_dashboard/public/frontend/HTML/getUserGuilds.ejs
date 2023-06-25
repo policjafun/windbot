@@ -5,30 +5,64 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guilds</title>
+    <title>Wind</title>
     <link rel="icon" href="/frontend/logo/wind_logo.ico" type="image/x-icon" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/frontend/CSS/getUserGuilds.css">
 </head>
 
 <body>
     <div class="container">
+        <p>User is logged in as:</p>
+        <ul>
+            <li>Avatar: <img src="<%= avatar %>" alt="User Avatar" width="35px" height="35px"></li>
+            <li>Username: <%= username %></li>
+            <li>Discriminator: <%= discriminator %></li>
+            <li>ID: <%= id %></li>
+            <a href="/logout">Logout</a>
+        </ul>
+
         <p>User is in the following guilds<br><a href="/">Back to home</a></p>
         <p>Guilds with perms</p>
         <ul class="list-group">
             <% for (var i = 0; i < guilds.length; i++) { %>
-            <% if (guilds[i].hasPerm ) { %>
-            <li class="list-group-item">
-                <div class="d-flex align-items-center">
-                    <img src="<%= guilds[i].avatar %>" width="15px" height="15px" class="mr-2">
-                    <a href="/getUserGuilds/<%= guilds[i].id %>"><%= guilds[i].name %></a>
-                </div>
-            </li>
-            <% } %>
+                <% if (guilds[i].hasPerm) { %>
+                    <li class="list-group-item">
+                        <div class="d-flex align-items-center">
+                            <img src="<%= guilds[i].avatar %>" width="35px" height="35px" class="mr-2">
+                            <a href="/getUserGuilds/<%= guilds[i].id %>"><%= guilds[i].name %></a>
+                        </div>
+                    </li>
+                <% } %>
             <% } %>
         </ul>
+
+        <p>User presence:</p>
+        <% if (presenceStatus) { %>
+            <p>Status: <%= presenceStatus %></p>
+        <% } %>
+        <% if (presenceActivities) { %>
+            <p>Activities:</p>
+            <ul>
+                <% presenceActivities.forEach(activity => { %>
+                    <li>
+                        <% if (activity.type === 'PLAYING') { %>
+                            Playing <%= activity.name %>
+                        <% } else if (activity.type === 'STREAMING') { %>
+                            Streaming <%= activity.name %>
+                        <% } else if (activity.type === 'LISTENING') { %>
+                            Listening to <%= activity.name %>
+                        <% } else if (activity.type === 'WATCHING') { %>
+                            Watching <%= activity.name %>
+                        <% } else if (activity.type === 'CUSTOM_STATUS') { %>
+                            Custom Status: <%= activity.state %>
+                        <% } %>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } %>
     </div>
-    
-   
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 
