@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+   <head>
+     <link href='https://cdn.jsdelivr.net/gh/ellekasai/twemoji-awesome@gh-pages/twemoji-awesome.css' rel='stylesheet'/>
+      <meta charset="utf-8">
+      <title>Avocadus</title>
+      <link rel="stylesheet" href="../CSS/index.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700,800,900&display=swap" rel="stylesheet">
+    
+      <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,800,900&display=swap" rel="stylesheet">
+      <link rel="icon" href="/frontend/logo/wind_logo.ico" type="image/x-icon" />
+      <link href="https://fonts.googleapis.com/css?family=Lato:300,400,600,700,800,900&display=swap" rel="stylesheet">
+   </head>
+   <body onload="loaderFunction()">
+
+      <div id="loader">
+         <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+          <span></span>
+          </div>
+      </div>
+      
+      <div id="page">
+            <nav>
+               <div class="logo noselect">
+                  <img class="noselect" src="./4672867.png" alt="logo"> Avocadus
+               </div>
+
+               <div class="openMenu noselect"><i class="fa fa-bars"></i></div>
+               <ul class="mainMenu noselect">
+                  <li><a class="active" href="#"><i class="fas fa-home"></i> Home</a></li>
+                  <li><a href="https://discord.com/api/oauth2/authorize?client_id=779323312173219851&permissions=8&scope=applications.commands%20bot"><i class="far fa-list-alt"></i> Zaproś</a></li>
+                  <li><a href="https://discord.gg/Gw85pX7qT5" target="_none"><i class="fas fa-headset"></i> Support</a></li>
+                  <div class="closeMenu noselect"><i class="fa fa-times"></i></div>
+               </ul>
+         </nav>
+
+            <div class="content noselect">
+               <div class="heading text-center">
+                  <div class="logo12">
+                  <img id="botLogo" class="noselect" src="./4672867.png" alt="botLogo">
+               </div>
+                  <h1 class="title">Avocadus</h1>
+                  <p class="subtitle"></p>
+                  
+                  <br>
+                  <a class="btn btn-primary" href="https://discord.com/api/oauth2/authorize?client_id=779323312173219851&permissions=8&scope=applications.commands%20bot" target="_none" role="button"><i class="fab fa-discord"></i> Dodaj do serwera</a>
+                                  <a class="btn btn-primary" href="https://discord.gg/Gw85pX7qT5" target="_none" role="button"><i class="fas fa-headset"></i> Serwer Support </a>
+                  <div id="copyrighxt">Copyright 2022 <b> 🥑 Doniczka_#0777</b>.<br/>
+              
+                  <div>
+            </div>   
+            <script>
+            const mainMenu = document.querySelector('.mainMenu');
+               const closeMenu = document.querySelector('.closeMenu');
+               const openMenu = document.querySelector('.openMenu');
+               const sidePanel = document.querySelector('.sidepanel');
+               const collapse = document.querySelector('.collapse');
+               const expand = document.querySelector('.expand');
+               const rightCol = document.querySelector('.right-col')
+               
+               const section = document.getElementsByClassName('section');
+               const subSection = document.getElementsByClassName('sub-section');
+               const title = document.getElementsByClassName('title');
+               
+               var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+               
+               console.log("Loaded.")
+               
+               openMenu.addEventListener('click',show);
+               closeMenu.addEventListener('click',close);
+               
+               function show(){
+                   mainMenu.style.display = 'flex';
+                   mainMenu.style.top = '0';
+               }
+               function close(){
+                   mainMenu.style.top = '-500%';
+                   mainMenu.style.display = 'flex';
+               }
+               
+               function openSidePanel() {
+                   sidePanel.style.display = "block";
+                   collapse.style.display = 'block';
+                   expand.style.display = "none"
+               }
+               
+               function closeSidePanel() {
+                   sidePanel.style.display = "none";
+                   collapse.style.display = 'none';
+                   expand.style.display = "block"
+               }
+               
+               if (width < 900) {
+                   title[0].onclick = function () {
+                       closeSidePanel()
+                   }
+                   title[1].onclick = function () {
+                       closeSidePanel()
+                   }
+                   title[2].onclick = function () {
+                       closeSidePanel()
+                   }
+                   title[3].onclick = function () {
+                       closeSidePanel()
+                   }
+                   title[4].onclick = function () {
+                       closeSidePanel()
+                   }    
+               }
+               
+               if (width < 900) {
+                   section[0].onclick = function () {
+                       closeSidePanel()
+                   }
+                   section[1].onclick = function () {
+                       closeSidePanel()
+                   }
+                   section[2].onclick = function () {
+                       closeSidePanel()
+                   }
+                   section[3].onclick = function () {
+                       closeSidePanel()
+                   }
+                   section[4].onclick = function () {
+                       closeSidePanel()
+                   }    
+                   section[5].onclick = function () {
+                       closeSidePanel()
+                   }    
+                   section[6].onclick = function () {
+                       closeSidePanel()
+                   }    
+                   section[7].onclick = function () {
+                       closeSidePanel()
+                   }    
+                   section[8].onclick = function () {
+                       closeSidePanel()
+                   }    
+                   section[9].onclick = function () {
+                       closeSidePanel()
+                   }    
+                   section[10].onclick = function () {
+                       closeSidePanel()
+                   }    
+               }
+               
+               if (width < 650) {
+                   subSection[0].onclick = function () {
+                       closeSidePanel()
+                   }
+                   subSection[1].onclick = function () {
+                       closeSidePanel()
+                   }
+               }
+               
+               var myVar;
+               
+               function loaderFunction() {
+                 myVar = setTimeout(showPage, 3500);
+               }
+               
+               function showPage() {
+                 document.getElementById("loader").style.display = "none";
+                 document.getElementById("page").style.display = "block";
+               }</script>
+      </div>
+             
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js'></script>
+   
+   </body>
+</html>
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
