@@ -9,61 +9,62 @@
     <link rel="icon" href="/frontend/logo/wind_logo.ico" type="image/x-icon" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="/frontend/CSS/getUserGuilds.css">
+    <script src="https://use.fontawesome.com/148530e2a4.js"></script>
+    <style>
+        .scrollable-list {
+            max-height: 300px;
+            /* Ustaw maksymalną wysokość listy */
+            overflow-y: auto;
+            /* Dodaj pionowe przewijanie, jeśli zawartość przekracza dostępną przestrzeń */
+        }
+    </style>
 </head>
 
 <body>
     <div class="container">
-        <p>User is logged in as:</p>
         <ul>
-            <li>Avatar: <img src="<%= avatar %>" alt="User Avatar" width="35px" height="35px"></li>
-            <li>Username: <%= username %></li>
-            <li>Discriminator: <%= discriminator %></li>
-            <li>ID: <%= id %></li>
-            <a href="/logout">Logout</a>
+            <img src="<%= avatar %>" alt="User Avatar" width="65px" height="65px">
+            <li>Username: <%= username %>
+            </li>
+            <li>Discriminator: <%= discriminator %>
+            </li>
+            <li>ID: <%= id %>
+            </li>
+           
         </ul>
+       <div class="prawygorny"> <a href="/logout">Logout</a> </div>
 
-        <p>User is in the following guilds<br><a href="/">Back to home</a></p>
-        <p>Guilds with perms</p>
-        <ul class="list-group">
-            <% for (var i = 0; i < guilds.length; i++) { %>
+       
+        <p>Twoje serwery:</p>
+        <ul class="list-group scrollable-list">
+            <% for (var i=0; i < guilds.length; i++) { %>
                 <% if (guilds[i].hasPerm) { %>
                     <li class="list-group-item">
                         <div class="d-flex align-items-center">
                             <img src="<%= guilds[i].avatar %>" width="35px" height="35px" class="mr-2">
-                            <a href="/getUserGuilds/<%= guilds[i].id %>"><%= guilds[i].name %></a>
+                            <% if (noBotGuilds.some((guild) => guild.id === guilds[i].id)) { %>
+                                <%= guilds[i].name %>
+                            <% } else { %>
+                                <a href="<%= adminGuilds.some((guild) => guild.id === guilds[i].id) ? `/getUserGuilds/${guilds[i].id}` : `/getUserGuilds/${guilds[i].id}` %>">
+                                    <%= guilds[i].name %>
+                                </a>
+                            <% } %>
+                            <% if (!adminGuilds.some((guild) => guild.id === guilds[i].id) && noBotGuilds.some((guild) => guild.id === guilds[i].id)) { %>
+                                <br>
+                                <i class="fa fa-sign-in ikonki" aria-hidden="true"></i>
+                                <a href="https://discord.com/oauth2/authorize?client_id=<%= process.env.CLIENT_ID %>&scope=bot&guild_id=<%= guilds[i].id %>" >Invite Bot</a>
+                            <% } %>
                         </div>
                     </li>
                 <% } %>
             <% } %>
         </ul>
 
-        <p>User presence:</p>
-        <% if (presenceStatus) { %>
-            <p>Status: <%= presenceStatus %></p>
-        <% } %>
-        <% if (presenceActivities) { %>
-            <p>Activities:</p>
-            <ul>
-                <% presenceActivities.forEach(activity => { %>
-                    <li>
-                        <% if (activity.type === 'PLAYING') { %>
-                            Playing <%= activity.name %>
-                        <% } else if (activity.type === 'STREAMING') { %>
-                            Streaming <%= activity.name %>
-                        <% } else if (activity.type === 'LISTENING') { %>
-                            Listening to <%= activity.name %>
-                        <% } else if (activity.type === 'WATCHING') { %>
-                            Watching <%= activity.name %>
-                        <% } else if (activity.type === 'CUSTOM_STATUS') { %>
-                            Custom Status: <%= activity.state %>
-                        <% } %>
-                    </li>
-                <% }) %>
-            </ul>
-        <% } %>
-    </div>
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 
 </html>

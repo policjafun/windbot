@@ -11,6 +11,7 @@ module.exports = {
    * @param {Client} client
    */
   async execute(client) {
+<<<<<<< Updated upstream
 
     /* Connect to database */
     if(!database) return;
@@ -40,3 +41,30 @@ async function updateActivity(client) {
     client.user.setActivity(status)
   }, activityInterval*1000)
 }
+=======
+    /* Połączenie z bazą danych */
+    if (!database) return;
+    mongoose.connect(database, {}).then(() => console.log(chalk.green("db connected"))).catch((err) => console.error(err));
+
+    console.log(`Zalogowano jako ${client.user.tag}, jestem na ${client.guilds.cache.size} serwerach`);
+    updateActivity(client);
+
+
+    /**
+     * @param {Client} client
+     */
+    async function updateActivity(client) {
+      let servercount = await client.guilds.cache.size;
+
+      const activities = [
+        `@doniczka`,
+      ];
+
+      setInterval(() => {
+        const status = activities[Math.floor(Math.random() * activities.length)];
+        client.user.setActivity(status);
+      }, activityInterval * 1000);
+    }
+  },
+};
+>>>>>>> Stashed changes

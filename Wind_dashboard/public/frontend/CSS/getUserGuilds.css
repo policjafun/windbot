@@ -1,46 +1,86 @@
-        /* Dodany styl */
-        body {
-            background-color: #f0f0f0;
-        }
+/* Dodany styl */
+body {
+  background-color: hsl(214, 20%, 16%);
+  overflow-y: initial;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&family=Fira+Mono&display=swap');
+  font-family: 'Fira Mono', monospace;
+  color: #fff;
+}
 
-        .container {
-            margin-top: 20px;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
+::-webkit-scrollbar {
+  width: 8px;
+}
 
-        ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
+::-webkit-scrollbar-thumb {
+  background-color: #0e0e0e;
+  border-radius: 10px;
+  z-index: 500;
+}
 
-        li {
-            margin-bottom: 10px;
-        }
+.prawygorny {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
 
-        img {
-            border-radius: 50%;
-        }
 
-        a {
-            color: #007bff;
-            text-decoration: none;
-        }
+.container {
+  position: relative;
+  width: calc(100% - 40px);
+  max-width: 500px;
+  height: auto;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 20px #0000001a;
+  overflow: hidden;
+  z-index: 45;
+  background: var(--clr-blue-400);
+  align-items: center;
+  padding: 20px;
+}
 
-        a:hover {
-            text-decoration: underline;
-        }
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
 
-        .list-group-item {
-            border: none;
-            background-color: #f8f9fa;
-            margin-bottom: 10px;
-            padding: 10px;
-            border-radius: 5px;
-        }
+li {
+  margin-bottom: 10px;
+}
 
-        .list-group-item:hover {
-            background-color: #e9ecef;
-        }
+img {
+  border-radius: 50%;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.list-group-item {
+  border: none;
+  background-color: hsl(213, 20%, 35%);
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.list-group-item:hover {
+  background-color: #7c9dbe;
+}
+.ikonki { 
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(-100%, -50%);
+  margin-left: 5px;
+}

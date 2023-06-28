@@ -13,6 +13,7 @@ const logoUrl = '../Wind_dashboard/public/frontend/logo/wind_logo.png';
 const client = new discord.Client({
   intents: [
     discord.GatewayIntentBits.Guilds,
+    discord.GatewayIntentBits.GuildPresences,
     discord.GatewayIntentBits.GuildVoiceStates,
     discord.GatewayIntentBits.GuildMembers,
     discord.GatewayIntentBits.GuildMessages,
@@ -21,6 +22,7 @@ const client = new discord.Client({
   ],
   allowedMentions: { parse: ['users', 'roles'], repliedUser: true }
 });
+
 
 const { QuickDB } = require("quick.db");
 const db = new QuickDB()

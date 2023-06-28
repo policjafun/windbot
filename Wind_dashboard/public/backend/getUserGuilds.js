@@ -1,10 +1,9 @@
-require('dotenv').config()
-const Client = require("../../index").client
-const schema = require('../../models/dashboard')
-const jwt = require('jsonwebtoken')
-const jwt_secret = process.env.JWTSECRET
-const { PermissionsBitField, Presence } = require('discord.js'); // Dodano import Presence
-
+require('dotenv').config();
+const Client = require("../../index").client;
+const schema = require('../../models/dashboard');
+const jwt = require('jsonwebtoken');
+const jwt_secret = process.env.JWTSECRET;
+const { PermissionsBitField, Presence } = require('discord.js');
 const DiscordOauth2 = require("discord-oauth2");
 
 module.exports = {
@@ -18,7 +17,7 @@ module.exports = {
       redirectUri: "http://localhost:90/callback",
     });
 
-    if (!req.cookies.token) return res.redirect('/login')
+    if (!req.cookies.token) return res.redirect('/login');
     let decoded;
     try {
       decoded = jwt.verify(req.cookies.token, jwt_secret);
@@ -35,20 +34,37 @@ module.exports = {
 
     let guildArray = await oauth.getUserGuilds(data.access_token);
     let mutualArray = [];
-    guildArray.forEach(g => {
+    let noBotGuilds = [];
+
+    for (const g of guildArray) {
       g.avatar = `https://cdn.discordapp.com/icons/${g.id}/${g.icon}.png`;
-      if (Client.guilds.cache.get(g.id)) {
-        const bitPermissions = new PermissionsBitField(g.permissions_new);
-        if (bitPermissions.has(PermissionsBitField.Flags.ManageGuild) || bitPermissions.has(PermissionsBitField.Flags.Administrator) || Client.guilds.cache.get(g.id).ownerId == data.userID) g.hasPerm = true
-        mutualArray.push(g);
-      } else g.hasPerm = false;
+      const bitPermissions = new PermissionsBitField(g.permissions);
+      if (
+        bitPermissions.has(PermissionsBitField.Flags.ManageGuild) ||
+        bitPermissions.has(PermissionsBitField.Flags.Administrator)
+      ) {
+        g.hasPerm = true;
+        if (Client.guilds.cache.has(g.id)) {
+          mutualArray.push(g);
+        } else {
+          if (!noBotGuilds.some((guild) => guild.id === g.id)) {
+            noBotGuilds.push(g);
+          }
+        }
+      }
+    }
+
+    // Sortowanie serwerów z botem na górze
+    mutualArray.sort((a, b) => {
+      return a.name.localeCompare(b.name);
     });
 
-    // Dodano pobranie obecności użytkownika
-    const presence = Client.users.cache.get(data.userID)?.presence;
-    const presenceStatus = presence?.status;
-    const presenceActivities = presence?.activities;
-    
+    // Sortowanie serwerów bez bota na dole
+    noBotGuilds.sort((a, b) => {
+      return a.name.localeCompare(b.name);
+    });
+
+
     let args = {
       avatar: `https://cdn.discordapp.com/avatars/${data.userID}/${data.user.avatar}.png`,
       username: data.user.username,
@@ -57,10 +73,9 @@ module.exports = {
       loggedIN: true,
       guilds: guildArray,
       adminGuilds: mutualArray,
-      presenceStatus: presenceStatus, // Dodano status obecności
-      presenceActivities: presenceActivities, // Dodano aktywności obecności
+      noBotGuilds: noBotGuilds,
     };
 
     res.render("./public/frontend/HTML/getUserGuilds.ejs", args);
   }
-}
+};
