@@ -9,6 +9,7 @@ body {
   @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&family=Fira+Mono&display=swap');
   font-family: 'Fira Mono', monospace;
   color: #fff;
+  overflow-y: hidden;
 }
 
 ::-webkit-scrollbar {
@@ -17,7 +18,7 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background-color: #0e0e0e;
-  border-radius: 10px;
+  border-radius: 20px;
   z-index: 500;
 }
 
@@ -29,13 +30,15 @@ body {
 
 
 .container {
+
+  margin-top: 30px;
   position: relative;
   width: calc(100% - 40px);
   max-width: 500px;
   height: auto;
   border-radius: 6px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  box-shadow: 0 0 20px #0000001a;
+  border: 1px solid #00000081;
+  box-shadow: 0 0 20px #00000081;
   overflow: hidden;
   z-index: 45;
   background: var(--clr-blue-400);

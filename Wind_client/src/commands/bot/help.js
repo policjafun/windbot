@@ -67,9 +67,8 @@ module.exports = {
       });
     });
 
-
-    interaction.reply({ embeds: [embedMsg], components: [helpMenu, Buttons] })
-
+    interaction.deferReply({ embeds: [embedMsg], components: [helpMenu, Buttons] });
+    interaction.deleteReply({ embeds: [embedMsg], components: [helpMenu, Buttons] });
 
   }
 }

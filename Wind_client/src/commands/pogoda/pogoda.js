@@ -209,7 +209,7 @@ module.exports = {
         text: `Beta by @doniczka`
       });
 
-    await interaction.reply({ embeds: [embed], files: [attachment] });
-
+    await interaction.deferReply({ embeds: [embed], files: [attachment] });
+      await interaction.deleteReply({ embeds: [embed], files: [attachment]})
   }
 }

@@ -9,7 +9,8 @@
     <link rel="icon" href="/frontend/logo/wind_logo.ico" type="image/x-icon" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="/frontend/CSS/getUserGuilds.css">
-    <script src="https://use.fontawesome.com/148530e2a4.js"></script>
+    <script src="https://kit.fontawesome.com/2c10079fa4.js" crossorigin="anonymous"></script>
+
     <style>
         .scrollable-list {
             max-height: 300px;
@@ -21,38 +22,67 @@
 </head>
 
 <body>
+    
     <div class="container">
-        <ul>
-            <img src="<%= avatar %>" alt="User Avatar" width="65px" height="65px">
-            <li>Username: <%= username %>
-            </li>
-            <li>Discriminator: <%= discriminator %>
-            </li>
-            <li>ID: <%= id %>
-            </li>
-           
-        </ul>
-       <div class="prawygorny"> <a href="/logout">Logout</a> </div>
-
+        <img src="/frontend/logo/wind_logo.png" width="35px" height="35px">
        
+        <p style="text-align: center;"><%= username %></p>
+        <img src="<%= avatar %>" class="" alt="User Avatar" width="65px" height="65px" style="text-align: center;">
+         
+               
+        <ul>
+            <li>
+              
+                <div>
+                   
+                    <p>Discriminator: <%= discriminator %></p>
+                    <p>ID: <%= id %></p>
+                </div>
+            </li>
+        </ul>
+        <div class="prawygorny"><a href="/">Home</a> <a href="/logout">Logout</a> </div>
+
+
+
+
         <p>Twoje serwery:</p>
         <ul class="list-group scrollable-list">
-            <% for (var i=0; i < guilds.length; i++) { %>
-                <% if (guilds[i].hasPerm) { %>
+            <% 
+                var sortedGuilds = guilds.sort((a, b) => {
+                    if (adminGuilds.some((guild) => guild.id === a.id) && !adminGuilds.some((guild) => guild.id === b.id)) {
+                        return -1; 
+                    } else if (!adminGuilds.some((guild) => guild.id === a.id) && adminGuilds.some((guild) => guild.id === b.id)) {
+                        return 1;
+                    } else if (noBotGuilds.some((guild) => guild.id === a.id) && !noBotGuilds.some((guild) => guild.id === b.id)) {
+                        return 1; 
+                    } else if (!noBotGuilds.some((guild) => guild.id === a.id) && noBotGuilds.some((guild) => guild.id === b.id)) {
+                        return -1; 
+                    } else {
+                        return 0; 
+                    }
+                });
+            %>
+            <% for (var i=0; i < sortedGuilds.length; i++) { %>
+                <% if (sortedGuilds[i].hasPerm) { %>
                     <li class="list-group-item">
                         <div class="d-flex align-items-center">
-                            <img src="<%= guilds[i].avatar %>" width="35px" height="35px" class="mr-2">
-                            <% if (noBotGuilds.some((guild) => guild.id === guilds[i].id)) { %>
-                                <%= guilds[i].name %>
+                            <% if (!sortedGuilds[i].avatar) { %>
+                                <% sortedGuilds[i].avatar = '/frontend/logo/wind_logo.png'; %>
+                            <% } %>
+                            <img src="<%= sortedGuilds[i].avatar %>" width="35px" height="35px" class="mr-2">
+                            <% if (noBotGuilds.some((guild) => guild.id === sortedGuilds[i].id)) { %>
+                                <%= sortedGuilds[i].name %>
                             <% } else { %>
-                                <a href="<%= adminGuilds.some((guild) => guild.id === guilds[i].id) ? `/getUserGuilds/${guilds[i].id}` : `/getUserGuilds/${guilds[i].id}` %>">
-                                    <%= guilds[i].name %>
+                                <a href="<%= adminGuilds.some((guild) => guild.id === sortedGuilds[i].id) ? `/getUserGuilds/${sortedGuilds[i].id}` : `/getUserGuilds/${sortedGuilds[i].id}` %>">
+                                    <i class="fa-solid fa-door-open ikonki" style="color: #ffffff;"></i>  <%= sortedGuilds[i].name %>
                                 </a>
                             <% } %>
-                            <% if (!adminGuilds.some((guild) => guild.id === guilds[i].id) && noBotGuilds.some((guild) => guild.id === guilds[i].id)) { %>
+                            <% if (!adminGuilds.some((guild) => guild.id === sortedGuilds[i].id) && noBotGuilds.some((guild) => guild.id === sortedGuilds[i].id)) { %>
                                 <br>
-                                <i class="fa fa-sign-in ikonki" aria-hidden="true"></i>
-                                <a href="https://discord.com/oauth2/authorize?client_id=<%= process.env.CLIENT_ID %>&scope=bot&guild_id=<%= guilds[i].id %>" >Invite Bot</a>
+                                <a href="https://discord.com/oauth2/authorize?client_id=<%= process.env.CLIENT_ID %>&scope=bot&guild_id=<%= sortedGuilds[i].id %>" style="margin-left: 15px;">Invite Bot</a>
+                                <br>
+                                <i class="fa-solid fa-user-plus ikonki" style="color: #ffffff;"></i>
+                                <br>
                             <% } %>
                         </div>
                     </li>
@@ -61,10 +91,9 @@
         </ul>
 
 
-
-
-
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    </div>
+    <p>powered by @wind developers, <a href="https://github.com/doniczek">@doniczka</a></p>
 </body>
 
 </html>

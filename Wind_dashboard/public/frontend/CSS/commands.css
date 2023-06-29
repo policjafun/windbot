@@ -1,0 +1,8 @@
+* { 
+    @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap');
+    font-family: 'Nanum Gothic Coding', monospace;
+}
+
+body { 
+    background-image: linear-gradient(45deg, #000000, #434343);
+}
