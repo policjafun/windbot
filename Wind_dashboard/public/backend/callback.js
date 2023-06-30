@@ -7,7 +7,7 @@ const DiscordOauth2 = require("discord-oauth2");
 
 module.exports = {
   name: '/callback',
-  run: async (req, res) => {
+  run: async (req, res) => { 
     const oauth = new DiscordOauth2({
       clientId: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
@@ -56,12 +56,12 @@ module.exports = {
       avatar: user.avatar
     };
 
-    await data.save();
+    await data.save(); 
     console.log("Dashboard data saved:", data);
 
     res.cookie('token', data.secretAccessKey, { maxAge: 835000 });
     console.log("Token cookie set:", data.secretAccessKey);
 
-    res.end("<script>window.location.href='/getUserGuilds';</script>");
+    res.end("<script>window.location.href='/servers';</script>");
   }
 };

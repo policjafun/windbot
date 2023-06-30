@@ -28,9 +28,9 @@ const { QuickDB } = require("quick.db");
 const db = new QuickDB()
 
 const oauth = new DiscordOauth2({
-	clientId: process.env.CLIENT_ID,
-	clientSecret: process.env.CLIENT_SECRET,
-	redirectUri: "http://localhost:90/callback",
+  clientId: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET,
+  redirectUri: "http://localhost:90/callback",
 });
 
 app.enable("trust proxy"); // if the IP is ::1 it means localhost
@@ -57,10 +57,10 @@ files.forEach(f => {
     app.get(file.name, file.run)
 
 
-    if (file.run2)       app.post(file.name, file.run2);
+    if (file.run2) app.post(file.name, file.run2);
 
-    table.addRow("dashboard", `${file.name}`)
- return console.log(`Dashboard ${table.toString()}`)
+
+    return console.log(`Dashboard ${file.name}`)
   }
 })
 

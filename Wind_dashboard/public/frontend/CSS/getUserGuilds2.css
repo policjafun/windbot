@@ -1,0 +1,19 @@
+body {
+    background-image: url("https://tatsu.gg/landing-page-background-pattern.png");
+    background-color: hsl(214, 20%, 16%);
+    background-size: 1100px;
+    overflow-y: initial;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&family=Fira+Mono&display=swap');
+    font-family: 'Fira Mono', monospace;
+    color: #fff;
+    padding: 0px;
+    margin: 0px;
+}
+.container-wrap { 
+    border-color: 1px #000 solid;
+    box-shadow: 0 0 10px #000 ;
+}

@@ -70,6 +70,6 @@ module.exports = {
       }
     }
 
-    res.redirect('/getUserGuilds');
+    res.redirect('/servers');
   },
 };

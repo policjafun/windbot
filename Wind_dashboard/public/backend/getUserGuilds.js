@@ -7,7 +7,7 @@ const { PermissionsBitField, Presence } = require('discord.js');
 const DiscordOauth2 = require("discord-oauth2");
 
 module.exports = {
-  name: "/getUserGuilds/",
+  name: "/servers/",
   run: async (req, res) => {
     delete require.cache[require.resolve("../frontend/HTML/getUserGuilds.ejs")];
 

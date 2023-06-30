@@ -1,164 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>serwery</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="icon" href="/frontend/logo/wind_logo.ico" type="image/x-icon" />
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>serwery</title>
+    <link rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="icon" href="/frontend/logo/wind_logo.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/frontend/CSS/getUserGuilds2.css">
+    <script src="https://kit.fontawesome.com/2c10079fa4.js"
+      crossorigin="anonymous"></script>
 
-</head>
+  </head>
 
-<body>
-  <div class="container">
-    <a href="/getUserGuilds" class="btn btn-primary">Back</a> <br><br>
-    <a href="/" class="btn btn-primary">Back to Home</a> <br><br>
-    <br><br>
-    <br><br>
-    <h2>Welcome channels:</h2>
+  <body>
+    <div class="container">
+      <a href="/getUserGuilds" class="btn btn-primary">Back</a> <br><br>
+      <a href="/" class="btn btn-primary">Back to Home</a> <br><br>
+      <br><br>
+      <br><br>
+      <h2>Welcome channels:</h2>
 
-  </div>
-
-  <form action="/getUserGuilds/<%= guild.id %>" method="post">
-    <div class="form-group">
-      <textarea name="welcomeMessage" id="welcomeMessage" rows="1" cols="10"></textarea>
-      <label for="channelId">Select Channel:</label>
-      <select id="channelId" name="channelId" class="form-control">
+    </div>
+    <div class="container-wrap">
+      <form action="/getUserGuilds/<%= guild.id %>" method="post">
+        <div class="form-group">
+          <textarea name="welcomeMessage" id="welcomeMessage" rows="1" cols="10"></textarea>
+          <label for="channelId">Select Channel:</label>
+          <select id="channelId" name="channelId" class="form-control">
+            <% channels.forEach(channel=> { %>
+            <option value="<%= channel.id %>">
+              <%= channel.name %> (ID: <%= channel.id %>)
+            </option>
+            <% }) %>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <h2>Logging options:</h2>
+        <label for="logEnabled">Logging:</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="logEnabled"
+            name="logEnabled" value="true" checked>
+          <label class="form-check-label" for="logEnabled">Enable</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="logDisabled"
+            name="logEnabled" value="false">
+          <label class="form-check-label" for="logDisabled">Disable</label>
+        </div>
+      </div>
+      <select id="channelIdLogi" name="channelIdLogi" class="form-control">
         <% channels.forEach(channel=> { %>
-          <option value="<%= channel.id %>">
-            <%= channel.name %> (ID: <%= channel.id %>)
-          </option>
-          <% }) %>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <h2>Logging options:</h2>
-      <label for="logEnabled">Logging:</label>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" id="logEnabled" name="logEnabled" value="true" checked>
-        <label class="form-check-label" for="logEnabled">Enable</label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" id="logDisabled" name="logEnabled" value="false">
-        <label class="form-check-label" for="logDisabled">Disable</label>
-      </div>
-    </div>
-    <select id="channelIdLogi" name="channelIdLogi" class="form-control">
-      <% channels.forEach(channel=> { %>
         <option value="<%= channel.id %>">
           <%= channel.name %> (ID: <%= channel.id %>)
         </option>
         <% }) %>
-    </select>
+      </select>
 
-    <div class="form-group">
-      <label for="events">Select Events:</label>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="selectAll" name="selectAll">
-        <label class="form-check-label" for="selectAll">Zaznacz/Odznacz wszystkie</label><br>
+      <div class="form-group">
+        <label for="events">Select Events:</label>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="selectAll"
+            name="selectAll">
+          <label class="form-check-label" for="selectAll">Zaznacz/Odznacz
+            wszystkie</label><br>
 
-        <input class="form-check-input" type="checkbox" id="channelCreation" name="events" value="channelCreation">
-        <label class="form-check-label" for="channelCreation">Stworzenie kanału</label><br>
+          <input class="form-check-input" type="checkbox" id="channelCreation"
+            name="events" value="channelCreation">
+          <label class="form-check-label" for="channelCreation">Stworzenie
+            kanału</label><br>
 
-        <input class="form-check-input" type="checkbox" id="channelDeletion" name="events" value="channelDeletion">
-        <label class="form-check-label" for="channelDeletion">Usunięcie kanału</label><br>
+          <input class="form-check-input" type="checkbox" id="channelDeletion"
+            name="events" value="channelDeletion">
+          <label class="form-check-label" for="channelDeletion">Usunięcie kanału</label><br>
 
-        <input class="form-check-input" type="checkbox" id="channelUpdate" name="events" value="channelUpdate">
-        <label class="form-check-label" for="channelUpdate">Zaktualizowanie kanału</label><br>
+          <input class="form-check-input" type="checkbox" id="channelUpdate"
+            name="events" value="channelUpdate">
+          <label class="form-check-label" for="channelUpdate">Zaktualizowanie
+            kanału</label><br>
 
-        <input class="form-check-input" type="checkbox" id="roleCreation" name="events" value="roleCreation">
-        <label class="form-check-label" for="roleCreation">Stworzenie roli</label><br>
+          <input class="form-check-input" type="checkbox" id="roleCreation"
+            name="events" value="roleCreation">
+          <label class="form-check-label" for="roleCreation">Stworzenie roli</label><br>
 
-        <input class="form-check-input" type="checkbox" id="roleDeletion" name="events" value="roleDeletion">
-        <label class="form-check-label" for="roleDeletion">Usunięcie roli</label><br>
+          <input class="form-check-input" type="checkbox" id="roleDeletion"
+            name="events" value="roleDeletion">
+          <label class="form-check-label" for="roleDeletion">Usunięcie roli</label><br>
 
-        <input class="form-check-input" type="checkbox" id="roleUpdate" name="events" value="roleUpdate">
-        <label class="form-check-label" for="roleUpdate">Zaktualizowanie roli</label><br>
+          <input class="form-check-input" type="checkbox" id="roleUpdate"
+            name="events" value="roleUpdate">
+          <label class="form-check-label" for="roleUpdate">Zaktualizowanie roli</label><br>
 
-        <input class="form-check-input" type="checkbox" id="serverUpdate" name="events" value="serverUpdate">
-        <label class="form-check-label" for="serverUpdate">Zaktualizowanie serwera</label><br>
+          <input class="form-check-input" type="checkbox" id="serverUpdate"
+            name="events" value="serverUpdate">
+          <label class="form-check-label" for="serverUpdate">Zaktualizowanie
+            serwera</label><br>
 
-        <input class="form-check-input" type="checkbox" id="userBlock" name="events" value="userBlock">
-        <label class="form-check-label" for="userBlock">Zablokowanie użytkownika</label><br>
+          <input class="form-check-input" type="checkbox" id="userBlock"
+            name="events" value="userBlock">
+          <label class="form-check-label" for="userBlock">Zablokowanie
+            użytkownika</label><br>
 
-        <input class="form-check-input" type="checkbox" id="userUnblock" name="events" value="userUnblock">
-        <label class="form-check-label" for="userUnblock">Odblokowanie użytkownika</label><br>
+          <input class="form-check-input" type="checkbox" id="userUnblock"
+            name="events" value="userUnblock">
+          <label class="form-check-label" for="userUnblock">Odblokowanie
+            użytkownika</label><br>
 
+          <input class="form-check-input" type="checkbox" id="messageDeletion"
+            name="events" value="messageDeletion">
+          <label class="form-check-label" for="messageDeletion">Usunięcie
+            wiadomości</label><br>
 
-        <input class="form-check-input" type="checkbox" id="messageDeletion" name="events" value="messageDeletion">
-        <label class="form-check-label" for="messageDeletion">Usunięcie wiadomości</label><br>
+          <input class="form-check-input" type="checkbox" id="messageUpdate"
+            name="events" value="messageUpdate">
+          <label class="form-check-label" for="messageUpdate">Zaktualizowanie
+            wiadomości</label><br>
 
-        <input class="form-check-input" type="checkbox" id="messageUpdate" name="events" value="messageUpdate">
-        <label class="form-check-label" for="messageUpdate">Zaktualizowanie wiadomości</label><br>
+          <input class="form-check-input" type="checkbox" id="ticketCreation"
+            name="events" value="ticketCreation">
+          <label class="form-check-label" for="ticketCreation">Stworzenie
+            ticketa</label><br>
 
-        <input class="form-check-input" type="checkbox" id="ticketCreation" name="events" value="ticketCreation">
-        <label class="form-check-label" for="ticketCreation">Stworzenie ticketa</label><br>
+          <input class="form-check-input" type="checkbox" id="ticketDeletion"
+            name="events" value="ticketDeletion">
+          <label class="form-check-label" for="ticketDeletion">Usunięcie ticketa</label><br>
 
-        <input class="form-check-input" type="checkbox" id="ticketDeletion" name="events" value="ticketDeletion">
-        <label class="form-check-label" for="ticketDeletion">Usunięcie ticketa</label><br>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="level">Select Level:</label>
+
+        <select id="channelIdLevel" name="channelIdLevel" class="form-control">
+          <% channels.forEach(channel=> { %>
+          <option value="<%= channel.id %>">
+            <%= channel.name %> (ID: <%= channel.id %>)
+          </option>
+          <% }) %>
+        </select>
+
+        <select id="ChannelLevelEnabled" name="ChannelLevelEnabled"
+          class="form-control">
+          <option value="On">On</option>
+          <option value="Off">Off</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+
+        <label for="ticket">Ticket setings</label>
+        <textarea name="ticketMessage" id="ticketMessage" rows="1" cols="10"></textarea>
+
+        <select id="channelIdTicket" name="channelIdTicket" class="form-control">
+          <% channels.forEach(channel=> { %>
+          <option value="<%= channel.id %>">
+            <%= channel.name %> (ID: <%= channel.id %>)
+          </option>
+          <% }) %>
+        </select>
 
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="level">Select Level:</label>
+      <div class="form-group">
 
-      <select id="channelIdLevel" name="channelIdLevel" class="form-control">
-        <% channels.forEach(channel=> { %>
-          <option value="<%= channel.id %>">
-            <%= channel.name %> (ID: <%= channel.id %>)
-          </option>
-          <% }) %>
-      </select>
-
-      <select id="ChannelLevelEnabled" name="ChannelLevelEnabled" class="form-control">
-        <option value="On">On</option>
-        <option value="Off">Off</option>
-      </select>
-    </div>
-
-
-    <div class="form-group">
-
-      <label for="ticket">Ticket setings</label>
-      <textarea name="ticketMessage" id="ticketMessage" rows="1" cols="10"></textarea>
-
-      <select id="channelIdTicket" name="channelIdTicket" class="form-control">
-        <% channels.forEach(channel=> { %>
-          <option value="<%= channel.id %>">
-            <%= channel.name %> (ID: <%= channel.id %>)
-          </option>
-          <% }) %>
-      </select>
-
-    </div>
-
-    <div class="form-group">
-
-      <label for="weryfikacja">Weryfikacja setings</label>
-      <select id="roleIdWeryfikacja" name="roleIdWeryfikacja" class="form-control">
-        <% roles.forEach(role=> { %>
+        <label for="weryfikacja">Weryfikacja setings</label>
+        <select id="roleIdWeryfikacja" name="roleIdWeryfikacja"
+          class="form-control">
+          <% roles.forEach(role=> { %>
           <option value="<%= role.id %>">
             <%= role.name %> (ID: <%= role.id %>)
           </option>
           <% }) %>
-      </select>
-      <select id="channelIdWeryfkacja" name="channelIdWeryfkacja" class="form-control">
-        <% channels.forEach(channel=> { %>
+        </select>
+        <select id="channelIdWeryfkacja" name="channelIdWeryfkacja"
+          class="form-control">
+          <% channels.forEach(channel=> { %>
           <option value="<%= channel.id %>">
             <%= channel.name %> (ID: <%= channel.id %>)
           </option>
           <% }) %>
-      </select>
-    </div>
-    <input type="submit" value="Submit" class="btn btn-primary">
-  </form>
+        </select>
+      </div>
+      <input type="submit" value="Submit" class="btn btn-primary">
+    </form>
 
-
-  <script>
+    <script>
     function toggleCheckboxes() {
       var checkboxes = document.querySelectorAll('input[type="checkbox"]');
       var selectAllCheckbox = document.getElementById('selectAll');
@@ -172,10 +201,12 @@
     selectAllCheckbox.addEventListener('change', toggleCheckboxes);
   </script>
 
-  <!-- Dodanie skryptu Bootstrap JavaScript -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
+    <!-- Dodanie skryptu Bootstrap JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
 
 </html>
