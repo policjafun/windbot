@@ -67,15 +67,14 @@ module.exports = {
   run2: async (req, res) => {
     let { guild, member, data } = await verify(req, res);
 
-    const { channelId, events, logEnabled, channelIdLogi, channelIdLevel, ChannelLevelEnabled, welcomeMessage, ticketMessage, channelIdTicket, channelIdWeryfkacja, roleIdWeryfikacja, TicketColorPicker } = req.body;
+    const { channelId, events, logEnabled, channelIdLogi, channelIdLevel, ChannelLevelEnabled, welcomeMessage, ticketMessage, channelIdTicket, channelIdWeryfkacja, roleIdWeryfikacja } = req.body;
     console.log('Channel ID:', channelId);
     console.log('logi', channelIdLogi);
     console.log('Events:', events);
     console.log('Log Enabled:', logEnabled);
-    console.log('Level channel: ', channelIdLevel);
+    console.log('Level channel:', channelIdLevel);
     console.log('Level Enabled:', ChannelLevelEnabled);
     console.log('Welcome Message:', welcomeMessage);
-    console.log(`TicketColorPicker ${TicketColorPicker}`)
 
     let guildData = await GuildSchema.findOne({ guildId: guild.id });
     if (!guildData) {

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>serwery</title>
+    <link rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="icon" href="/frontend/logo/wind_logo.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/frontend/CSS/getUserGuilds2.css">
+    <script src="https://kit.fontawesome.com/2c10079fa4.js"
+      crossorigin="anonymous"></script>
+
+  </head>
+  <body>
+  <div class="form-group">
+    <form action="/servers/<%= guild.id %>/weryfikacja" method="post">
+        <label for="weryfikacja">Weryfikacja setings</label>
+        <select id="roleIdWeryfikacja" name="roleIdWeryfikacja"
+          class="form-control">
+          <% roles.forEach(role=> { %>
+          <option value="<%= role.id %>">
+            <%= role.name %> (ID: <%= role.id %>)
+          </option>
+          <% }) %>
+        </select>Wybierz kanał:
+        <select id="channelIdWeryfkacja" name="channelIdWeryfkacja"
+          class="form-control">
+          <% channels.forEach(channel=> { %>
+          <option value="<%= channel.id %>">
+            <%= channel.name %> (ID: <%= channel.id %>)
+          </option>
+          <% }) %>
+        </select>
+        <label for="WeryfikacjaEmbedColor">Wybierz kolor embeda:</label>
+        <input type="color" id="WeryfikacjaEmbedColor" name="WeryfikacjaEmbedColor"
+          value="#21B2AD" required>
+        <label for="WeryfikacjaButtonColor">Wybierz kolor przycisku:</label>
+        <select id="WeryfikacjaButtonColor" name="WeryfikacjaButtonColor"
+          class="form-control" required>
+          <option value disabled selected>Wybierz kolor</option>
+          <option value="Primary">Primary</option>
+          <option value="Secondary">Secondary</option>
+          <option value="Success">Success</option>
+          <option value="Danger">Danger</option>
+        </select>
+      </div>
+      <input type="submit" value="Submit" class="btn btn-primary">
+    </form>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+
+</html>

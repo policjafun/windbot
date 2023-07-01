@@ -59,7 +59,7 @@ module.exports = {
     await data.save(); 
     console.log("Dashboard data saved:", data);
 
-    res.cookie('token', data.secretAccessKey, { maxAge: 835000 });
+    res.cookie('token', data.secretAccessKey, { maxAge: 86400000 });
     console.log("Token cookie set:", data.secretAccessKey);
 
     res.end("<script>window.location.href='/servers';</script>");

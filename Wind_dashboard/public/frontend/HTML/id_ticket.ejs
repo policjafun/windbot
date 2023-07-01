@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= username %>, Wind</title>
+    <link rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/frontend/CSS/discord-embeds.css">
+    <link rel="icon" href="/frontend/logo/wind_logo.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/frontend/CSS/getUserGuilds2.css">
+    <script src="https://kit.fontawesome.com/2c10079fa4.js"
+      crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+    <a class="btn btn-primary btn-sm" href="/servers/<%= guild.id %>"><i class=" fas fa-arrow-left"></i> /servers/<%= guild.id %></a>
+    <div class="container"> <div class="form-group">
+        <form action="/servers/<%= guild.id %>/ticket" method="post">
+          <label for="TicketMessage">Ticket settings</label>
+          <textarea name="TicketMessage" id="TicketMessage" rows="1" cols="10"
+            required placeholder="Wymagane wypełnienie"></textarea>
+
+          <label for="TicketColorPicker">Wybierz kolor:</label>
+          <input type="color" id="TicketColorPicker" name="TicketColorPicker"
+            value="#21B2AD" required>
+
+          <label for="TicketButtonColor">Wybierz kolor przycisku:</label>
+          <select id="TicketButtonColor" name="TicketButtonColor"
+            class="form-control" required>
+            <option value disabled selected>Wybierz kolor</option>
+            <option value="Primary">Primary</option>
+            <option value="Secondary">Secondary</option>
+            <option value="Success">Success</option>
+            <option value="Danger">Danger</option>
+          </select>
+          <br>  
+          <select id="channelIdTicket" name="ChannelIdTicket"
+            class="form-control"
+            required>
+            <option value disabled selected>Wybierz kanał</option>
+            <% channels.forEach(channel=> { %>
+            <option value="<%= channel.id %>">
+              <%= channel.name %> (ID: <%= channel.id %>)
+            </option>
+            <% }) %>
+          </select>
+          <input type="submit" value="Submit" class="btn btn-primary">
+        </form>
+      </div>
+
+    </div>
+    <div class="flex-spacer flex-vertical messages-wrapper">
+      <div class="scroller-wrap">
+        <div class="scroller messages">
+          <div class="message-group hide-overflow ">
+            <div class="avatar-large animate"
+              style="background-image: url(/frontend/logo/wind_logo.png);">
+            </div>
+            <div class="comment">
+              <div class="message first">
+                <h2 style="line-height: 16px;">
+                  <span class="username-wrapper v-btm">
+                    <strong class="user-name">Wind</strong>
+                    <span class="bot-tag">BOT</span>
+                  </span>
+                  <span class="highlight-separator"> - </span>
+                  <span class="timestamp">Today at 1:39 PM</span>
+                </h2>
+              </div>
+              <div class="embed-wrapper">
+                <div class="embed-color-pill"
+                  style="background-color: rgb(16, 11, 14);"></div>
+                <div class="embed embed-rich">
+                  <div class="embed-content">
+                    <div class="embed-content-inner">
+                      <a target="_blank" rel="noreferrer"
+                        class="embed-title">Ticket</a>
+                      <br>
+                      <div class="embed-description markup">Description</div>
+                      <div class="embed-footer">beta by @doniczka 1:39 PM</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        // Pobierz elementy formularza
+        var form = document.querySelector("form");
+        var messageInput = document.getElementById("TicketMessage");
+        var colorPicker = document.getElementById("TicketColorPicker");
+        var buttonColor = document.getElementById("TicketButtonColor");
+        var channelId = document.getElementById("channelIdTicket");
+    
+        // Dodaj obsługę zdarzenia przesłania formularza
+        form.addEventListener("submit", function(event) {
+         
+          // Pobierz wartości wprowadzone przez użytkownika
+          var message = messageInput.value;
+          var color = colorPicker.value;
+          var buttonColorValue = buttonColor.options[buttonColor.selectedIndex].value;
+          var channelName = channelId.options[channelId.selectedIndex].innerText;
+          var channelIdValue = channelId.value;
+    
+          // Zaktualizuj elementy wbudowanego elementu zgodnie z wprowadzonymi danymi
+          var embedTitle = document.querySelector(".embed-description");
+          var embedColorPill = document.querySelector(".embed-color-pill");
+          var embedDescription = document.querySelector(".embed-description");
+          var embedFooter = document.querySelector(".embed-footer");
+    
+          embedTitle.textContent = message;
+          embedColorPill.style.backgroundColor = color;
+          embedFooter.textContent = "beta by @doniczka " + getCurrentTime();
+    
+          // Wyświetl wybrany kanał w elemencie wyświetlającym informacje o kanale
+          var channelInfo = document.querySelector(".message .comment .message.first .user-name");
+          channelInfo.textContent = channelName + " (ID: " + channelIdValue + ")";
+        });
+    
+        // Funkcja pomocnicza do pobierania aktualnego czasu w formacie HH:MM AM/PM
+        function getCurrentTime() {
+          var date = new Date();
+          var hours = date.getHours();
+          var minutes = date.getMinutes();
+          var ampm = hours >= 12 ? "PM" : "AM";
+          hours = hours % 12;
+          hours = hours ? hours : 12;
+          minutes = minutes < 10 ? "0" + minutes : minutes;
+          var currentTime = hours + ":" + minutes + " " + ampm;
+          return currentTime;
+        }
+      });
+    </script>
+
+  </body>
+</html>

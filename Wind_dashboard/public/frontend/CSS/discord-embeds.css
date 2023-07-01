@@ -1,0 +1,427 @@
+* {
+    @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&family=Fira+Mono&display=swap');
+    font-family: 'Fira Mono', monospace;
+}
+
+.bot-tag {
+    background: #7289da;
+    font-size: 10px;
+    font-weight: 600;
+    color: #fff !important;
+    margin-left: 6px;
+    padding: 1px 2px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    vertical-align: bottom;
+    line-height: 16px;
+    -ms-flex-negative: 0;
+    flex-shrink: 0
+}
+
+.compact .bot-tag {
+    margin: 0 3px 0 0
+}
+
+.avatar-large,
+.avatar-profile,
+.avatar-small,
+.avatar-xlarge,
+.avatar-xsmall,
+.avatar-xxlarge {
+    background-clip: padding-box;
+    position: relative;
+    background-color: none;
+    background-position: 50%;
+    border-radius: 50%
+}
+
+.avatar-large {
+    width: 40px;
+    height: 40px;
+    background-size: 40px 40px
+}
+
+.chat .messages-wrapper,
+.chat .messages-wrapper .scroller-wrap {
+    overflow: hidden
+}
+
+.chat .messages {
+    margin: 0;
+    overflow-x: hidden
+}
+
+.hide-overflow {
+    overflow: hidden
+}
+
+.message-group {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 20px 0;
+    margin-left: 20px;
+    margin-right: 6px;
+    border-bottom: 1px solid #000000;
+    box-sizing: border-box;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text
+}
+
+.message-group a {
+    color: #00b0f4;
+    transition: .05s;
+    cursor: pointer
+}
+
+.message-group a:hover {
+    text-decoration: underline
+}
+
+.message-group .message .markup a {
+    unicode-bidi: bidi-override;
+    direction: ltr
+}
+
+.message-group .comment .markup code.inline,
+.message-group .comment .markup pre {
+    font-family: Consolas, Liberation Mono, Menlo, Courier, monospace;
+    background: #000000
+}
+
+.message-group .accessory {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -ms-flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column
+}
+
+.message-group:last-of-type,
+.message-group:last-of-type:after {
+    border-bottom: none
+}
+
+.message-group .emoji {
+    margin-bottom: -5px
+}
+
+.message-group .image {
+    vertical-align: bottom;
+    max-width: 520px
+}
+
+.message-group .avatar-large {
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    margin-top: -2px;
+    margin-right: 20px
+}
+
+.message-group h2 {
+    margin: 0;
+    padding: 0
+}
+
+.message-group h2 strong {
+    color: #2e3136;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0
+}
+
+.message-group h2 .timestamp {
+    color: #99aab5;
+    font-size: 12px;
+    letter-spacing: 0;
+    font-weight: 500;
+    text-transform: none;
+    margin-left: 6px
+}
+
+.message-group .highlight-separator {
+    opacity: 0;
+    width: 0;
+    display: inline-block;
+    color: #99aab5
+}
+
+.message-group .highlight-separator.right-pad {
+    text-indent: -10px
+}
+
+.message-group .highlight-separator.left-pad {
+    text-indent: 10px
+}
+
+.message-group .comment {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    margin-right: 20px;
+    min-width: 0
+}
+
+.message-group .comment .markup {
+    color: #737f8d;
+    font-size: 15px;
+    line-height: 1.1em;
+    white-space: pre-wrap;
+    margin-top: 6px;
+    word-wrap: break-word
+}
+
+.message-group .comment .markup strong {
+    font-weight: 700
+}
+
+.message-group .comment .markup em {
+    font-style: italic
+}
+
+.message-group .comment .markup pre {
+    border: 2px solid #f3f3f3;
+    border-radius: 5px;
+    max-width: 90%;
+    box-sizing: border-box;
+    font-size: 12px;
+    white-space: pre-wrap;
+    margin-top: 6px
+}
+
+.message-group .comment .markup pre code {
+    background: #f9f9f9;
+    text-indent: 0
+}
+
+.message-group .comment .markup code.inline {
+    width: auto;
+    height: auto;
+    padding: .2em;
+    border-radius: 3px;
+    font-size: 85%;
+    text-indent: 0
+}
+
+
+
+.message-group.compact .message {
+    padding: 0;
+    margin: 6px 0;
+    line-height: 18px;
+    vertical-align: bottom
+}
+
+.message-group.compact .message:not(.first) .timestamp {
+    color: transparent !important
+}
+
+.message-group.compact .message:hover .timestamp {
+    color: #99aab5 !important
+}
+
+.message-group.compact .message .message-text .markup {
+    text-indent: -100px;
+    padding-left: 100px
+}
+
+.message-group.compact .message .message-text .markup .user-name {
+    margin-right: 5px;
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 600;
+    color: #4f545c;
+    word-break: break-all
+}
+
+
+
+.embed,
+.embed-wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox
+}
+
+.embed-wrapper {
+    position: relative;
+    margin-top: 5px;
+    max-width: 520px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex
+}
+
+.embed-wrapper .embed-color-pill {
+    width: 4px;
+    background: #cacbce;
+    border-radius: 3px 0 0 3px;
+    -ms-flex-negative: 0;
+    flex-shrink: 0
+}
+
+.embed {
+    padding: 8px 10px;
+    box-sizing: border-box;
+    background: rgb(48, 44, 52);
+    border: 1px solid rgb(48, 44, 52);
+    border-radius: 0 3px 3px 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column
+}
+
+.embed .embed-content,
+.embed.embed-rich {
+    display: -webkit-box;
+    display: -ms-flexbox
+}
+
+.embed .embed-fields,
+.embed.embed-link {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal
+}
+
+.embed div.embed-title {
+    color: #d5dec5;
+}
+
+.embed .embed-content {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 10px
+}
+
+.embed .embed-content .embed-content-inner {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1
+}
+
+.embed.embed-rich {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    border-radius: 0 3px 3px 0
+}
+
+.embed.embed-rich .embed-rich-thumb {
+    max-height: 80px;
+    max-width: 80px;
+    border-radius: 3px;
+    width: auto;
+    -o-object-fit: contain;
+    object-fit: contain;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    margin-left: 20px
+}
+
+.embed.embed-inline {
+    padding: 0;
+    margin: 4px 0;
+    border-radius: 3px
+}
+
+.embed .image,
+.embed video {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    overflow: hidden;
+    border-radius: 2px
+}
+
+.embed .embed-content-inner>:last-child,
+.embed .embed-content:last-child,
+.embed .embed-inner>:last-child,
+.embed>:last-child {
+    margin-bottom: 0 !important
+}
+
+.embed .embed-provider {
+    display: inline-block;
+    color: #87909c;
+    font-weight: 400;
+    font-size: 12px;
+    margin-bottom: 5px
+}
+
+.embed .embed-author {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-bottom: 5px
+}
+
+.embed .embed-author-name,
+.embed .embed-footer,
+.embed .embed-title {
+    display: inline-block;
+    font-weight: 600
+}
+
+.embed .embed-author-name {
+    font-size: 14px;
+    color: #4f545c !important
+}
+
+.embed .embed-author-icon {
+    margin-right: 9px;
+    width: 20px;
+    height: 20px;
+    -o-object-fit: contain;
+    object-fit: contain;
+    border-radius: 50%
+}
+
+.embed .embed-footer {
+    font-size: 12px;
+    color: #d5dec5;
+    letter-spacing: 0
+}
+
+.embed .embed-footer-icon {
+    margin-right: 10px;
+    height: 18px;
+    width: 18px;
+    -o-object-fit: contain;
+    object-fit: contain;
+    float: left;
+    border-radius: 2.45px
+}
+
+.embed .embed-title {
+    margin-bottom: 4px;
+    font-size: 14px
+}
+
+.embed .embed-title+.embed-description {
+    margin-top: -3px !important
+}
+
+.embed .embed-description {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: #d5dec5;
+    letter-spacing: 0;
+}
