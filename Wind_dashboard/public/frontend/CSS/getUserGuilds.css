@@ -14,6 +14,24 @@ body {
   overflow-y: hidden;
 }
 
+
+.loader {
+    border: 4px solid #ffffff; /* Light grey */
+    border-top: 4px solid #494949; /* Blue */
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    animation: spin 2s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+
 ::-webkit-scrollbar {
   width: 8px;
 }

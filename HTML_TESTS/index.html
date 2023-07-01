@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #favcolor {
+            width: 100px; /* Ustal szerokość color pickera */
+            height: 40px; /* Ustal wysokość color pickera */
+            border-radius: 4px; /* Dodaj zaokrąglenie do brzegów */
+            border: none; /* Usuń obramowanie */
+            outline: none; /* Usuń zaznaczenie */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Dodaj cień */
+        }
+    </style>
+</head>
+<body>
+    <h2>Kolor dla embeda:</h2>
+    <label for="favcolor">Select your favorite color:</label>
+    <input type="color" id="favcolor" name="favcolor" value="#21B2AD">
+    <p id="colorValue">Wybrany kolor: </p>
+
+    <script>
+        var colorPicker = document.getElementById("favcolor");
+        var colorValue = document.getElementById("colorValue");
+
+        colorPicker.addEventListener("input", function() {
+            var selectedColor = colorPicker.value;
+            colorValue.textContent = "Wybrany kolor: " + selectedColor;
+        });
+    </script>
+</body>
+</html>

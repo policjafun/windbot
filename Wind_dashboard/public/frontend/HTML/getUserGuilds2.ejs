@@ -17,7 +17,7 @@
 
   <body>
     <div class="container">
-      <a href="/getUserGuilds" class="btn btn-primary">Back</a> <br><br>
+      <a href="/servers" class="btn btn-primary">Back</a> <br><br>
       <a href="/" class="btn btn-primary">Back to Home</a> <br><br>
       <br><br>
       <br><br>
@@ -25,7 +25,7 @@
 
     </div>
     <div class="container-wrap">
-      <form action="/getUserGuilds/<%= guild.id %>" method="post">
+      <form action="/servers/<%= guild.id %>" method="post">
         <div class="form-group">
           <textarea name="welcomeMessage" id="welcomeMessage" rows="1" cols="10"></textarea>
           <label for="channelId">Select Channel:</label>
@@ -153,6 +153,10 @@
 
         <label for="ticket">Ticket setings</label>
         <textarea name="ticketMessage" id="ticketMessage" rows="1" cols="10"></textarea>
+
+        <label for="TicketColorPicker">Wybierz kolor:</label>
+        <input type="color" id="TicketColorPicker" name="TicketColorPicker" value="#21B2AD">
+       
 
         <select id="channelIdTicket" name="channelIdTicket" class="form-control">
           <% channels.forEach(channel=> { %>
