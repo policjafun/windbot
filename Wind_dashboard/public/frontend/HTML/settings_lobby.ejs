@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= username %> Wind
+    </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="icon" href="/frontend/logo/wind_logo.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/frontend/CSS/settings_lobby.css">
+    <script src="https://kit.fontawesome.com/2c10079fa4.js" crossorigin="anonymous"></script>
+    <style>
+        /* Animacje */
+        @keyframes buttonOnAnimation {
+            0% {
+                background-color: green;
+            }
+
+            50% {
+                background-color: limegreen;
+            }
+
+            100% {
+                background-color: green;
+            }
+        }
+
+        @keyframes buttonOffAnimation {
+            0% {
+                background-color: red;
+            }
+
+            50% {
+                background-color: orangered;
+            }
+
+            100% {
+                background-color: red;
+            }
+        }
+
+        /* Kolorystyka przycisków */
+        .on-button {
+            animation: buttonOnAnimation 1s infinite;
+        }
+
+        .off-button {
+            animation: buttonOffAnimation 1s infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- System Welcome -->
+    <div class="welcome-system">
+        <h1>Welcome System</h1>
+        <p>System Status: <span id="welcome-status">Off</span></p>
+        <button onclick="toggleWelcomeSystem()" id="welcome-button" class="off-button">Turn On/Off</button>
+    </div>
+
+    <!-- System Goodbye -->
+    <div class="goodbye-system">
+        <h1>Goodbye System</h1>
+        <p>System Status: <span id="goodbye-status">Off</span></p>
+        <button onclick="toggleGoodbyeSystem()" id="goodbye-button" class="off-button">Turn On/Off</button>
+    </div>
+
+    <script>
+        // Welcome System
+        function toggleWelcomeSystem() {
+            var welcomeStatus = document.getElementById("welcome-status");
+            var welcomeButton = document.getElementById("welcome-button");
+            if (welcomeStatus.innerText === "Off") {
+                welcomeStatus.innerText = "On";
+                welcomeButton.classList.remove("off-button");
+                welcomeButton.classList.add("on-button");
+                sendSystemStatus("Welcome", "On");
+            } else {
+                welcomeStatus.innerText = "Off";
+                welcomeButton.classList.remove("on-button");
+                welcomeButton.classList.add("off-button");
+                sendSystemStatus("Welcome", "Off");
+            }
+        }
+
+        // Goodbye System
+        function toggleGoodbyeSystem() {
+            var goodbyeStatus = document.getElementById("goodbye-status");
+            var goodbyeButton = document.getElementById("goodbye-button");
+            if (goodbyeStatus.innerText === "Off") {
+                goodbyeStatus.innerText = "On";
+                goodbyeButton.classList.remove("off-button");
+                goodbyeButton.classList.add("on-button");
+                sendSystemStatus("Goodbye", "On");
+            } else {
+                goodbyeStatus.innerText = "Off";
+                goodbyeButton.classList.remove("on-button");
+                goodbyeButton.classList.add("off-button");
+                sendSystemStatus("Goodbye", "Off");
+            }
+        }
+
+        // Funkcja wysyłająca informację o stanie systemu na serwer
+        function sendSystemStatus(system, status) {
+            // Tutaj dodaj logikę przesyłania danych na serwer
+            // Możesz użyć AJAX, Fetch lub innej metody do wysyłki żądania
+            // Przykład:
+            fetch('/servers/<%= guild.id%>/settings_lobby', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    system: system,
+                    status: status
+                })
+            })
+                .then(response => response.json())
+                .then(data => console.log(data))
+                .catch(error => console.error(error));
+        }
+    </script>
+</body>
+
+</html>

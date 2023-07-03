@@ -1,4 +1,5 @@
 const { Client, CommandInteraction, InteractionType } = require("discord.js");
+const AppBan = require("../../models/ApplicationBan");
 
 module.exports = {
   name: "interactionCreate",
@@ -10,6 +11,8 @@ module.exports = {
    */
   async execute(interaction, client) {
     
+    const banuserid = await AppBan.findOne({ UserId: interaction.user.id });
+    if(banuserid) return interaction.reply({ content: `Rejected (banned) unban? write to doniczka @wind owner, Reason: ${banuserid.reason}`, ephemeral: true });
     if(interaction.isChatInputCommand()) {
       const { commands } = client;
       const { commandName } = interaction;

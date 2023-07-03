@@ -5,8 +5,6 @@ const { ButtonInteraction, Client, AttachmentBuilder, EmbedBuilder, messageLink,
     TextInputStyle,
     ModalSubmitInteraction
 } = require('discord.js')
-const { QuickDB } = require("quick.db");
-const db = new QuickDB();
 
 module.exports = {
     data: {
