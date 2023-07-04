@@ -1,39 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>serwery</title>
-    <link rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="icon" href="/frontend/logo/wind_logo.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="/frontend/CSS/getUserGuilds2.css">
-    <script src="https://kit.fontawesome.com/2c10079fa4.js"
-      crossorigin="anonymous"></script>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>serwery</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="icon" href="/frontend/logo/wind_logo.ico" type="image/x-icon" />
+  <script src="https://kit.fontawesome.com/2c10079fa4.js" crossorigin="anonymous"></script>
 
-  </head>
+</head>
 
-  <body>
-    <div class="container">
-      <a href="/servers" class="btn btn-primary">Back</a> <br><br>
-      <a href="/" class="btn btn-primary">Back to Home</a> <br><br>
-      <br><br>
-      <br><br>
-      <a href="/servers/<%= guild.id %>/ticket" class="btn btn-primary btm-sm">Ticket</a>
-      <a href="/servers/<%= guild.id %>/weryfikacja" class="btn btn-primary btn-sm">Weryfikacja</a> 
-      <a href="/servers/<%= guild.id %>/logi" class="btn btn-primary btn-sm">Logi</a> 
-    
-        
-    </form>
+<body>
+  <style>
+    .card:hover {
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+      transition: ease-in-out 0.2s;
+      background-color: rgb(15, 107, 189);
+    }
 
-    <!-- Dodanie skryptu Bootstrap JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  </body>
+    .card:not(:hover) {
+      transition: ease-in-out 0.2s;
+      background-color: rgb(16, 132, 233);
+    }
+
+    .card {
+      background-color: rgb(16, 132, 233);
+    }
+
+    .card-button {
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .card-button:hover {
+      background-color: #007bff;
+      color: #fff;
+    }
+  </style>
+
+  <div class="container-fluid">
+    <div class="row flex-nowrap">
+      <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+        <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+          <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <span class="fs-5 d-none d-sm-inline">Wind</span>
+          </a>
+
+
+          <div class="dropdown pb-4">
+            <!-- Obrazek guildi -->
+            <div class="d-flex align-items-center mb-3">
+              <img src="<%= guild.iconURL({ type: 'png' }) %>" alt="serweravatar" height="35px" width="35px"
+                class="rounded-circle me-2">
+              <p class="align-items-center mb-3">
+                <%= guild.name %>
+              </p>
+            </div>
+            <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+              <li class="nav-item">
+                <a href="#" class="nav-link align-middle px-0">
+                  <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+                </a>
+              </li>
+              <li>
+                <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                  <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
+                <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                  <li class="w-100">
+                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1 </a>
+                  </li>
+                  <li>
+                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2 </a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="#" class="nav-link px-0 align-middle">
+                  <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Orders</span></a>
+              </li>
+              <li>
+                <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                  <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Bootstrap</span></a>
+                <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+                  <li class="w-100">
+                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1</a>
+                  </li>
+                  <li>
+                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                  <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Products</span> </a>
+                <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
+                  <li class="w-100">
+                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 1</a>
+                  </li>
+                  <li>
+                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 2</a>
+                  </li>
+                  <li>
+                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 3</a>
+                  </li>
+                  <li>
+                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 4</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="#" class="nav-link px-0 align-middle">
+                  <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Customers</span> </a>
+              </li>
+            </ul>
+            <hr>
+          </div>
+        </div>
+      </div>
+
+      <div class="col py-3">
+        <div class="col py-3">
+          <a href="/home" class="card-link">
+            <div class="card" style="width: 18rem;">
+              <img src="..." class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                  card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </a>
+        </div>
+
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
 
 </html>

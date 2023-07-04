@@ -14,7 +14,7 @@ module.exports = {
     const oauth = new DiscordOauth2({
       clientId: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
-      redirectUri: "http://54.37.136.47:3000/callback",
+      redirectUri: "http://localhost:90/callback",
     });
 
     if (!req.cookies.token) return res.redirect('/login');
