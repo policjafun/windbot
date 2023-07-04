@@ -30,7 +30,7 @@ const db = new QuickDB()
 const oauth = new DiscordOauth2({
   clientId: process.env.CLIENT_ID,
   clientSecret: process.env.CLIENT_SECRET,
-  redirectUri: "http://localhost:90/callback",
+  redirectUri: "http://windbot.cloud/callback",
 });
 
 app.enable("trust proxy"); // if the IP is ::1 it means localhost
@@ -41,7 +41,11 @@ app.set("view engine", "ejs");
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
-
+app.use((req, res, next) => {
+  const clientIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+  console.log(`IP: ${clientIp}`);
+  next();
+});
 
 module.exports.client = client;
 
@@ -73,4 +77,4 @@ app.get('*', (req, res) => {
 
 client.login(process.env.TOKEN).then(console.log(`Logged In`));
 
-app.listen(process.env.PORT || 90, () => console.log(`App on port ${process.env.PORT || 90}`));
+app.listen(process.env.PORT || 80, () => console.log(`App on port ${process.env.PORT || 80}`));

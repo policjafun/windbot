@@ -1,5 +1,5 @@
 const { GuildMember, Client } = require("discord.js");
-const WelcomeSchema = require("../../models/WelcomeSchema");
+const WelcomeSchema = require("../../models/welcomeSchema");
 
 module.exports = {
   name: "guildMemberAdd",

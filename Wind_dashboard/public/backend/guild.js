@@ -5,7 +5,7 @@ const schema = require('../../models/dashboard');
 const jwt = require('jsonwebtoken');
 const jwt_secret = process.env.JWTSECRET;
 const GuildSchema = require('../../models/guild-schema');
-const WelcomeSchema = require('../../models/welcomeschema');
+const WelcomeSchema = require('../../models/welcomeSchema.js');
 const weryfikacjaSchema = require('../../models/weryfikacja');
 
 module.exports = {
@@ -23,7 +23,6 @@ module.exports = {
       return res.redirect('/servers');
 
     await guild.fetch({ force: true });
-
     let guildData = await GuildSchema.findOne({ guildId: guild.id });
 
     const serwerdc = client.guilds.cache.get(guild.id);

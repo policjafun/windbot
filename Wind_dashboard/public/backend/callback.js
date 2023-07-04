@@ -11,7 +11,7 @@ module.exports = {
     const oauth = new DiscordOauth2({
       clientId: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
-      redirectUri: "http://localhost:90/callback",
+      redirectUri: "http://windbot.cloud/callback",
     });0
 
     console.log("Callback endpoint reached.");
