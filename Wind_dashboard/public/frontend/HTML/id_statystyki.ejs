@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= username %>, Wind
+    </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/frontend/CSS/discord-embeds.css">
+    <link rel="icon" href="/frontend/logo/wind_logo.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/frontend/CSS/id_statystyki.css">
+    <script src="https://kit.fontawesome.com/2c10079fa4.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <a class="btn btn-primary btn-sm" href="/servers/<%= guild.id %>"><i class=" fas fa-arrow-left"></i> /servers/<%=
+            guild.id %></a>
+    <div class="container">
+        <div class="form-group">
+            <form action="/servers/<%= guild.id %>/statystyki" method="post">
+                <p>Statystyki</p>
+
+                <br>
+                <p>Ilosc osob:</p>
+                <select id="MemberCountChannel" name="MemberCountChannel" class="form-control" required>
+                    <option value disabled selected><%= MemberCountChannel || ' ' %></option>
+                    <% channels.forEach(channel=> { %>
+                        <option value="<%= channel.id %>">
+                            <%= channel.name %> (ID: <%= channel.id %>)
+                        </option>
+                        <% }) %>
+                </select>
+
+                <div class="textarea-container">
+                    <label for="message">Wiadomość:</label>
+                    <label for="message">{MemberCount} - wpisz to, aby wyświetlić ilość użytkowników</label>
+                    <br>
+                    <textarea id="message" name="MemberCountMessage" maxlength="20" required
+                        placeholder="<%= MemberCountMessage || " " %>"></textarea>
+                </div>
+                <input type="submit" value="Zapisz" class="btn btn-primary">
+            </form>
+
+
+            <form action="/servers/<%= guild.id %>/statystyki" method="post">
+                <br>
+                <p>Aktytwni:</p>
+                <select id="presencecounter" name="presencecounter" class="form-control" required>
+                    <option value disabled selected></option>
+                    <% channels.forEach(channel=> { %>
+                        <option value="<%= channel.id %>">
+                            <%= channel.name %> (ID: <%= channel.id %>)
+                        </option>
+                        <% }) %>
+                </select>
+                <div class="textarea-container">
+                    <label for="message">Wiadomość:</label>
+                    <label for="message">{Active}, {DND}, {AFK},</label>
+                    <br>
+                    <textarea id="message" name="presencecountermessage" maxlength="20" required
+                        placeholder="Wpisz swoją wiadomość"></textarea>
+                </div>
+                <input type="submit" value="Zapisz" class="btn btn-primary">
+            </form>
+            <form action="/servers/<%= guild.id %>/statystyki" method="post">
+
+                <br>
+                <p>Nowa osoba:</p>
+                <select id="newperson" name="newpersonchannel" class="form-control" required>
+                    <option value disabled selected>Wybierz kanał</option>
+                    <% channels.forEach(channel=> { %>
+                        <option value="<%= channel.id %>">
+                            <%= channel.name %> (ID: <%= channel.id %>)
+                        </option>
+                        <% }) %>
+                </select>
+
+
+                <div class="textarea-container">
+                    <label for="message">Wiadomość:</label>
+                    <label for="message">{NewPerson} - wpisz to aby nazwę nowej osoby</label>
+                    <br>
+                    <textarea id="message" name="newpersonmessage" maxlength="30" required
+                        placeholder="Wpisz swoją wiadomość"></textarea>
+                </div>
+                <input type="submit" value="Zapisz" class="btn btn-primary">
+            </form>
+            <form action="/servers/<%= guild.id %>/statystyki" method="post">
+
+
+
+        </div>
+
+
+    </div>
+    <div class="footer">
+        wind &copy; 2023 (@doniczka)🐱‍👤<br> <i class="fas fa-server"></i>
+        <%= client.guilds.cache.size %> servers
+    </div>
+
+</body>
+
+</html>

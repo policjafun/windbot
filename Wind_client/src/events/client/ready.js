@@ -10,7 +10,7 @@ module.exports = {
    * @param {Client} client
    */
   async execute(client) {
-    /* Connect to database */
+   
     if (!database) return;
     mongoose
       .connect(database)
@@ -36,4 +36,12 @@ async function updateActivity(client) {
     const status = activities[Math.floor(Math.random() * activities.length)];
     client.user.setActivity(status);
   }, activityInterval * 1000);
+
+
+
+
+
 }
+
+
+

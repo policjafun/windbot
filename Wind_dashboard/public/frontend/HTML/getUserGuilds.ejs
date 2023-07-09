@@ -1,116 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Wind</title>
-        <link rel="icon" href="/frontend/logo/wind_logo.ico" type="image/x-icon" />
-        <link rel="stylesheet"
-            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/frontend/CSS/getUserGuilds.css">
-        <script src="https://kit.fontawesome.com/2c10079fa4.js"
-            crossorigin="anonymous"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wind</title>
+    <link rel="icon" href="/frontend/logo/wind_logo.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/frontend/CSS/getUserGuilds.css">
+    <script src="https://kit.fontawesome.com/2c10079fa4.js" crossorigin="anonymous"></script>
 
-        <style>
-        .scrollable-list {
-            max-height: 300px;
-            /* Ustaw maksymalną wysokość listy */
-            overflow-y: auto;
-            /* Dodaj pionowe przewijanie, jeśli zawartość przekracza dostępną przestrzeń */
-        }
-    </style>
-    </head>
+</head>
 
-    <body>
-        <div id="loader" class="loader"></div>
-
-        <div class="container">
-
-            <img src="/frontend/logo/wind_logo.png" width="35px" height="35px">
-
-            <p style="text-align: center;">
-                <%= username %>
-            </p>
-            <img src="<%= avatar %>" class alt="User Avatar" width="65px"
-                height="65px" style="text-align: center;">
-
-            <div class="prawygorny">
-                <a href="/" class="btn btn-primary btn-sm"><i class="fas fa-house"></i> Home</a>
-                <a href="/logout" class="btn btn-sm btn-danger ">
-                    <i class="fa-solid fa-right-from-bracket"
-                        style="color: #ffffff;"></i> Logout</a>
-            </div>
-
-            <p>Twoje serwery:</p>
-            <ul class="list-group scrollable-list">
-                <% var sortedGuilds=guilds.sort((a, b)=> {
-                if (adminGuilds.some((guild) => guild.id === a.id) &&
-                !adminGuilds.some((guild) => guild.id === b.id)) {
-                return -1;
-                } else if (!adminGuilds.some((guild) => guild.id === a.id) &&
-                adminGuilds.some((guild) => guild.id ===
-                b.id)) {
-                return 1;
-                } else if (noBotGuilds.some((guild) => guild.id === a.id) &&
-                !noBotGuilds.some((guild) => guild.id ===
-                b.id)) {
-                return 1;
-                } else if (!noBotGuilds.some((guild) => guild.id === a.id) &&
-                noBotGuilds.some((guild) => guild.id ===
-                b.id)) {
-                return -1;
-                } else {
-                return 0;
-                }
-                });
-                %>
-                <% for (var i=0; i < sortedGuilds.length; i++) { %>
-                <% if (sortedGuilds[i].hasPerm) { %>
-                <li class="list-group-item">
-                    <div class="d-flex align-items-center">
-                        <% if (!sortedGuilds[i].avatar) { %>
-                        <% sortedGuilds[i].avatar='/frontend/logo/wind_logo.png'
-                        ; %>
-                        <% } %>
-                        <img src="<%= sortedGuilds[i].avatar %>" width="35px"
-                            height="35px"
-                            class="mr-2">
-                        <% if (noBotGuilds.some((guild)=> guild.id ===
-                        sortedGuilds[i].id)) { %>
-                        <%= sortedGuilds[i].name %>
-                        <% } else { %>
-                        <a
-                            href="<%= adminGuilds.some((guild) => guild.id === sortedGuilds[i].id) ? `/servers/${sortedGuilds[i].id}` : `/servers/${sortedGuilds[i].id}` %>">
-                            <i class="fa-solid fa-door-open ikonki"
-                                style="color: #ffffff;"></i>
-                            <%= sortedGuilds[i].name %>
-                        </a>
-                        <% } %>
-                        <% if (!adminGuilds.some((guild)=> guild.id ===
-                        sortedGuilds[i].id) && noBotGuilds.some((guild) =>
-                        guild.id === sortedGuilds[i].id)) { %>
-                        <br>
-                        <a
-                            href="https://discord.com/oauth2/authorize?client_id=<%= process.env.CLIENT_ID %>&scope=bot&guild_id=<%= sortedGuilds[i].id %>"
-                            style="margin-left: 15px;" class="btn btn-primary btn-sm"><i class="fas fa-plus ikonki" style="color: #ffffff; "></i> Invite Bot</a>
-                        <br>
-                    
-                        <br>
-                        <% } %>
-                    </div> 
-                </li>
-                <% } %>
-                <% } %>
-            </ul>
-
-            <script
-                src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<body>
+    <nav><a class="LinkType" style="text-decoration: none;" href="/">
+        <div class="logo noselect">
+            <img class="noselect" src="/frontend/logo/wind_logo.png"> Wind
         </div>
-        <p>powered by @wind developers, <a href="https://github.com/doniczek">@doniczka</a></p>
+        </a>
+        <div class="openMenu noselect"><i class="fa fa-bars"></i></div>
+        <ul class="mainMenu noselect">
+            <li><a href="/logout" class="active"><i class="fa fa-sign-out"></i> Wyloguj</a></li>
+            <li><a class="active" href="/"><i class="fas fa-home"></i> Home</a></li>
+            <li><a
+                    href="https://discord.com/api/oauth2/authorize?client_id=1095444107872174110&permissions=8&scope=bot%20applications.commands"><i
+                        class="far fa-list-alt"></i> Zaproś</a></li>
+            <li><a href="https://discord.gg/DKnSYM3t8e" target="_none"><i class="fas fa-headset"></i> Support</a></li>
+            <div class="closeMenu noselect"><i class="fa fa-times"></i></div>
+        </ul>
+    </nav>
 
+    <p style="font-size: 20px;" class="tekst"> <i class="fas fa-layer-group"></i> Wybierz serwer: </p>
+    <div class="css-1dtl25x">
+        <% var sortedGuilds=guilds.sort((a, b)=> {
+            if (adminGuilds.some((guild) => guild.id === a.id) && !adminGuilds.some((guild) => guild.id === b.id)) {
+            return -1;
+            } else if (!adminGuilds.some((guild) => guild.id === a.id) && adminGuilds.some((guild) => guild.id ===
+            b.id)) {
+            return 1;
+            } else if (noBotGuilds.some((guild) => guild.id === a.id) && !noBotGuilds.some((guild) => guild.id ===
+            b.id)) {
+            return -1;
+            } else if (!noBotGuilds.some((guild) => guild.id === a.id) && noBotGuilds.some((guild) => guild.id ===
+            b.id)) {
+            return 1;
+            } else {
+            return 0;
+            }
+            });
+            %>
+            <% sortedGuilds.forEach((guild)=> { %>
+                <% if (guild.hasPerm && client.guilds.cache.get(guild.id)) { %>
+                    <a class="LinkType css-nn640c"style="text-decoration: none;" target="_self" href="/servers/<%= guild.id %>">
+                        <div class="css-64753c" style="box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 8px; top: 0px;">
+                            <div>
+                                <div class="css-157sphu">
+                                    <% if (guild.avatar !=="https://cdn.discordapp.com/icons/" + guild.id + "/null.png"
+                                        ) { %>
+                                        <img src="<%= guild.avatar %>" alt="<%= guild.name %> avatar" width="64"
+                                            height="64">
+                                        <% } else { %>
+                                            <div class="css-10sxhg3">
+                                                <p class="css-1nfskvo">
+                                                    <%= guild.name.charAt(0).toUpperCase() %>
+                                                </p>
+                                            </div>
+                                            <% } %>
+                                </div>
+                                <span class="css-1mpeh2e">
+                                    <%= guild.name %>
+                                </span>
+                            </div>
+                            <span class="css-1t9mdzz"></span>
+                        </div>
+                    </a>
+                    <% } %>
 
-    </body>
+                        <% if (guild.hasPerm && !client.guilds.cache.get(guild.id)) { %>
+                            <a class="LinkType css-nn640c" style="text-decoration: none;" target="_self"
+                                href="https://discord.com/oauth2/authorize?client_id=<%= process.env.CLIENT_ID %>&scope=bot&guild_id=<%= sortedGuilds.id %>">
+                                <div class="css-64753c" style="box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 8px; top: 0px;">
+                                    <div> <span class="badge badge-pill badge-warning">add bot</span>
+                                        <div class="css-157sphu">
+                                            <% if (guild.avatar !=="https://cdn.discordapp.com/icons/" + guild.id
+                                                + "/null.png" ) { %>
+                                                <img src="<%= guild.avatar %>" alt="<%= guild.name %> avatar" width="64"
+                                                    height="64">
+                                                <% } else { %>
+                                                    <div class="css-10sxhg3">
+                                                        <p class="css-1nfskvo">
+                                                            <%= guild.name.charAt(0).toUpperCase() %>
+                                                        </p>
+                                                    </div>
+                                                    <% } %>
+
+                                        </div>
+                                        <span class="css-1mpeh2e">
+                                            <%= guild.name %>
+                                        </span>
+                                        <div class=".css-t2fedb"></div>
+                                    </div>
+                                    <span class="css-1t9mdzz"></span>
+                                </div>
+                            </a>
+                            <% } %>
+
+                                <% }); %>
+    </div>
+
+    <div class="footer">
+        Wind &copy; 2023 (@doniczka)🐱‍👤<br> <i class="fas fa-server"></i>
+        <%= client.guilds.cache.size %> servers
+    </div>
+</body>
 
 </html>

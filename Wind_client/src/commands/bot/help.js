@@ -1,24 +1,16 @@
-const { SlashCommandBuilder,
-  PermissionFlagsBits,
-  ChatInputCommandInteraction,
-  EmbedBuilder,
-  ActionRowBuilder,
-  ButtonBuilder,
-  ButtonStyle,
-  StringSelectMenuBuilder,
-  Client, } = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits, ChatInputCommandInteraction, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder, Client } = require('discord.js');
 const fs = require("fs");
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("pomoc")
-    .setDescription("wyświetla wszytkie komendy bota"),
+    .setDescription("wyświetla wszystkie komendy bota"),
 
   /**
    * @param {ChatInputCommandInteraction} interaction
    * @param {Client} client
    */
   async execute(interaction, client) {
-
     const dirs = fs.readdirSync("./src/commands");
     const slashCommands = await client.application.commands.fetch();
 
@@ -36,7 +28,7 @@ module.exports = {
 
     const embedMsg = new EmbedBuilder()
       .setTitle("Lista komend")
-      .setDescription("Wybierz kategorię poniżej aby otrzymać listę")
+      .setDescription("Wybierz kategorię poniżej, aby otrzymać listę")
       .addFields(
         {
           name: `Liczba kategorii`,
@@ -44,7 +36,7 @@ module.exports = {
           inline: true,
         },
         {
-          name: `Wszytkie funkcje`,
+          name: `Wszystkie funkcje`,
           value: `${slashCommands.size}`,
           inline: true,
         }
@@ -67,8 +59,9 @@ module.exports = {
       });
     });
 
-    interaction.deferReply({ embeds: [embedMsg], components: [helpMenu, Buttons] });
-    interaction.deleteReply({ embeds: [embedMsg], components: [helpMenu, Buttons] });
-
+    // Check if the interaction has already been replied to
+    if (!interaction.replied) {
+      interaction.channel.send({ embeds: [embedMsg], components: [helpMenu, Buttons] });
+    }
   }
-}
+};

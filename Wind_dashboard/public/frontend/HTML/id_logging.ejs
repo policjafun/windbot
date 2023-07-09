@@ -36,7 +36,7 @@
                 </div>
             </div>
 
-            <select id="channelIdLogi" name="channelid" class="form-control">
+            <select id="channelIdLogi" name="channelId" class="form-control">
                 <% channels.forEach(channel=> { %>
                 <option value="<%= channel.id %>">
                     <%= channel.name %> (ID: <%= channel.id %>)
@@ -50,8 +50,17 @@
                     <input class="form-check-input" type="checkbox" id="selectAll" name="selectAll">
                     <label class="form-check-label" for="selectAll">Select/Deselect All</label><br>
 
+                    
+                    <input class="form-check-input" type="checkbox" id="ticketCreation" name="events" value="ticketCreation">
+                    <label class="form-check-label" for="ticketCreation">Ticket Creation</label><br>
+                    
+                   
+                    <input class="form-check-input" type="checkbox" id="TicketDeletion" name="events" value="TicketDeletion">
+                    <label class="form-check-label" for="TicketDeletion">Ticket Deletion</label><br>
+                    
                     <input class="form-check-input" type="checkbox" id="channelCreation" name="events" value="channelCreation">
                     <label class="form-check-label" for="channelCreation">Channel Creation</label><br>
+
 
                     <input class="form-check-input" type="checkbox" id="channelDeletion" name="events" value="channelDeletion">
                     <label class="form-check-label" for="channelDeletion">Channel Deletion</label><br>

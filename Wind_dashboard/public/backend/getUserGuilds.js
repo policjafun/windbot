@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const jwt_secret = process.env.JWTSECRET;
 const { PermissionsBitField, Presence } = require('discord.js');
 const DiscordOauth2 = require("discord-oauth2");
+const { client } = require('../../index');
 
 module.exports = {
   name: "/servers/",
@@ -64,7 +65,7 @@ module.exports = {
       return a.name.localeCompare(b.name);
     });
 
-
+  
     let args = {
       avatar: `https://cdn.discordapp.com/avatars/${data.userID}/${data.user.avatar}.png`,
       username: data.user.username,
@@ -74,6 +75,8 @@ module.exports = {
       guilds: guildArray,
       adminGuilds: mutualArray,
       noBotGuilds: noBotGuilds,
+      client: client,
+      
     };
 
     res.render("./public/frontend/HTML/getUserGuilds.ejs", args);

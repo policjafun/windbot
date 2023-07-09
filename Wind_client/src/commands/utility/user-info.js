@@ -5,7 +5,7 @@ const AppBan = require("../../models/ApplicationBan");
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("userinfo")
-        .setDescription("wyświetla informacje na temat osoby wybranej")
+        .setDescription("Wyświetla informacje na temat wybranej osoby.")
         .addUserOption(option =>
             option
                 .setName("osoba")
@@ -21,23 +21,22 @@ module.exports = {
         const badges = user.flags.toArray().map(flag => flag.toLowerCase());
 
         const appBan = await AppBan.findOne({ UserId: user.id });
+        const date1 = new Date(user.createdAt);
+        const createdTimestampInSeconds = Math.floor(user.createdTimestamp / 1000);
+        const createdTimestampFormatted = `<t:${createdTimestampInSeconds}:R>`;
+        const createdAtFormatted = `<t:${Math.floor(date1.getTime() / 1000)}:R>`;
 
         const InfoEmbed = new EmbedBuilder()
-            .setTitle("User info")
-            .setFields(
-                { name: "username", value: `${user.username} (${user.id})`, inline: true },
-                { name: "Rangi:", value: "Rangi", inline: true },
-                { name: "Stworzono/Dołaczono", value: `${user.createdAt}, (${user.createdTimestamp})`, inline: true },
-                { name: "AppBan", value: appBan ? "Banned" : "Not banned", inline: true },
-                { name: "Discord Info", value: badges.join(", "), inline: true }
-            )
-            .setColor(`#21B2AD`)
-            .setFooter({ text: `beta by @doniczka` });
+            .setTitle("Informacje o użytkowniku")
+            .addFields(
+                { name: "Nazwa użytkownika", value: `${user.username} (${user.id})`, inline: true },
+                { name: "Rangi", value: "Rangi", inline: true },
+                { name: "Stworzono/Dołączono", value: `${createdAtFormatted} (${createdTimestampFormatted})`, inline: true },
+                { name: "AppBan", value: appBan ? "Zbanowany" : "Nie zbanowany", inline: true },
+                { name: "Informacje o koncie Discord", value: badges.join(", ") || "Brak odznak", inline: true })
+            .setColor("#21B2AD")
+            .setFooter({ text: "Beta by @doniczka", iconURL: user.avatarURL() });
 
-        console.log(interaction.user);
-        console.log(appBan);
-        interaction.deferReply({ embeds: [InfoEmbed] });
-        interaction.deleteReply();
-        interaction.channel.send({ embeds: [InfoEmbed] });
+        interaction.reply({ embeds: [InfoEmbed] })
     }
 };

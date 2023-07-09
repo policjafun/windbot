@@ -1,10 +1,10 @@
 const { Client, Collection, GatewayIntentBits, Partials, EmbedBuilder } = require("discord.js");
-const { Guilds, GuildMembers, GuildMessages, GuildVoiceStates, DirectMessages, GuildMessageReactions, GuildEmojisAndStickers, GuildWebhooks, GuildIntegrations, MessageContent } = GatewayIntentBits;
+const { Guilds, GuildMembers, GuildMessages, GuildVoiceStates, DirectMessages, GuildPresences, GuildMessageReactions, GuildEmojisAndStickers, GuildWebhooks, GuildIntegrations, MessageContent } = GatewayIntentBits;
 const { User, Message, GuildMember, ThreadMember, GuildScheduledEvent, Reaction } = Partials;
 
-const client = new Client({ intents: [Guilds, GuildMembers, GuildMessages, GuildVoiceStates, DirectMessages, GuildMessageReactions, GuildEmojisAndStickers, GuildWebhooks, GuildIntegrations, MessageContent], partials: [User, Message, GuildMember, ThreadMember, GuildScheduledEvent, Reaction] });
+const client = new Client({ intents: [Guilds, GuildMembers, GuildPresences, GuildMessages, GuildVoiceStates, DirectMessages, GuildMessageReactions, GuildEmojisAndStickers, GuildWebhooks, GuildIntegrations, MessageContent], partials: [User, Message, GuildMember, ThreadMember, GuildScheduledEvent, Reaction] });
 
-client.config = require('../config.json') 
+client.config = require('../config.json')
 const { botMainColor, botErrorColor } = require('../config.json')
 module.exports = client;
 
@@ -12,6 +12,7 @@ client.voiceGenerator = new Collection();
 client.commands = new Collection();
 client.modals = new Collection();
 client.buttons = new Collection();
+client.selectMenus = new Collection();
 
 const { loadEvents } = require('./Handlers/EventHandler')
 const { loadCommands } = require('./Handlers/CommandHandler')
@@ -26,20 +27,20 @@ client.hexErrorColor = botErrorColor.replace('0x', "#");
 
 /* Mod Logs */
 const modlogsDB = require('./models/ModerationLogs');
-client.modlogs = async function({ Member, Action, Color, Reason }, interaction) {
+client.modlogs = async function ({ Member, Action, Color, Reason }, interaction) {
   const data = await modlogsDB.findOne({ GuildID: interaction.guild.id })
-  if(!data) return;
+  if (!data) return;
   const channel = interaction.guild.channels.cache.get(data.ChannelID);
   const logsEmbed = new EmbedBuilder()
-  .setColor(Color)
-  .setAuthor({name: Member.user.tag, iconURL: Member.user.displayAvatarURL()})
-  .setTitle("📕 Moderation Logs")
-  .addFields([
-    {name: "Reason", value: `${Reason || "No reason given"}`, inline: false},
-    {name: "Member", value: `<@${Member.id}>`, inline: false}])
-  .setFooter({ text: `Action: ${Action}`})
+    .setColor(Color)
+    .setAuthor({ name: Member.user.tag, iconURL: Member.user.displayAvatarURL() })
+    .setTitle("📕 Moderation Logs")
+    .addFields([
+      { name: "Reason", value: `${Reason || "No reason given"}`, inline: false },
+      { name: "Member", value: `<@${Member.id}>`, inline: false }])
+    .setFooter({ text: `Action: ${Action}` })
 
-  channel.send({embeds: [logsEmbed]})
+  channel.send({ embeds: [logsEmbed] })
 }
 
 client.login(client.config.token).then(() => {

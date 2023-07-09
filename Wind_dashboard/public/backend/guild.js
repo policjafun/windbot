@@ -57,7 +57,8 @@ module.exports = {
       selectedChannelId: channelId,
       selectedEvents: events,
       logEnabled: logEnabled,
-      roles: roles
+      roles: roles,
+      client: client
     };
 
     res.render("./public/frontend/HTML/getUserGuilds2.ejs", args);

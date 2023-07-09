@@ -73,11 +73,8 @@ module.exports = {
         ) {
             return res.redirect('/servers');
         }
-
         await guild.fetch({ force: true });
-
         const serwerdc = client.guilds.cache.get(guild.id);
-
         const channels = serwerdc?.channels.cache ? Array.from(
             serwerdc.channels.cache.values()
         ).filter(channel => channel.type === ChannelType.GuildText).map(channel => ({
@@ -85,7 +82,6 @@ module.exports = {
             name: channel.name,
             type: channel.type,
         })) : [];
-
 
         const args = {
             avatar: `https://cdn.discordapp.com/avatars/${data.userID}/${data.user.avatar}.png`,
@@ -105,11 +101,12 @@ module.exports = {
         let { guild, member, data } = verifyResult;
 
         const { events, logEnabled, channelId } = req.body;
-
-        // Save the log data to the database
+        console.log(channelId);
+        // Save the 
+ 
         const logData = await LogDb.findOneAndUpdate(
             { guildId: guild.id },
-            { logEnabled, events, channelId },
+            { logEnabled: logEnabled, channelId: channelId },
             { upsert: true, new: true }
         );
 
@@ -132,7 +129,8 @@ module.exports = {
             error: false,
             channels: channels,
             events: events,
-            logEnabled: logData.logEnabled,
+            logEnabled: logEnabled,
+            channelId: channelId,
         };
         res.render("./public/frontend/HTML/id_logging2.ejs", args);
     },
