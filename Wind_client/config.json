@@ -1,8 +1,7 @@
 {
-    "token": "MTA5NTQ0NDEwNzg3MjE3NDExMA.GQpe4V.R5fJygYqoPFDstJM2F60ykELp7-H8reIM_owN0",
+    "token": "asd",
     "developerGuild": "1010662815327080528",
     "activityInterval": 5,
     "botMainColor": "0xff5454",
-    "botErrorColor": "0xdb3535",
-    "database": "mongodb+srv://wind:uQPw7iyuzBUnyHCy@cluster0.twn3ee3.mongodb.net/"
+    "botErrorColor": "0xdb3535"
 }
